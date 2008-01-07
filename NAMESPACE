@@ -1,0 +1,12 @@
+import(mvtnorm)
+export(
+       BAYSTAR,
+       TAR.coeff,
+       TAR.lagd,
+       TAR.lik,
+       TAR.sigma,
+       TAR.simu,
+       TAR.summary,
+       TAR.thres
+       )
+
