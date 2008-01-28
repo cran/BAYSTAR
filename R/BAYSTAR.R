@@ -18,8 +18,8 @@ if (!missing(thresVar)){
 }
 else zt<-yt         
 ## Set initial values
-phi.1<- rep(0.05,p1)
-phi.2<- rep(0.05,p2)
+phi.1 <- rep(0.05, p1 + constant)
+phi.2 <- rep(0.05, p2 + constant)
 sigma.1<- 0.2
 sigma.2<- 0.2
 lagd<- 3

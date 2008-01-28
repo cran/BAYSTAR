@@ -42,7 +42,6 @@ A list with output containing the following components:
 
 \author{ Cathy W. S. Chen, Edward M.H. Lin, F.C. Liu, and Richard Gerlach  }
 \examples{
-library(mvtnorm)
 data(unemployrate)
 x<- unemployrate
 lagp1<-c(2,3,4,10,12)
@@ -52,7 +51,7 @@ nIterations<- 10000
 nBurnin<- 2000
 ## Step size for the MH algorithm
 step.thv<- 2.0
-y<-BAYSTAR(x,lagp1,lagp2,nIterations,nBurnin,constant=0,differ=1,step.thv=step.thv)
+y<-BAYSTAR(x,lagp1,lagp2,nIterations,nBurnin,constant=0,differ=1,d0=3,step.thv=step.thv)
 }
 
 \keyword{ methods }

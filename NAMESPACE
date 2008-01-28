@@ -1,4 +1,5 @@
 import(mvtnorm)
+
 export(
        BAYSTAR,
        TAR.coeff,
@@ -9,4 +10,3 @@ export(
        TAR.summary,
        TAR.thres
        )
-
