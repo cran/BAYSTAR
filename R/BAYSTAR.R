@@ -119,10 +119,10 @@ con.1<-mcmc.stat[1,1]
 par.1<-mcmc.stat[2:(p1+1),1]
 con.2<-mcmc.stat[p1+2,1]
 par.2<-mcmc.stat[(p1+2+1):(p1+p2+2),1]
-thv  <-mcmc.stat[p1+p2+3,1]
+thv  <-mcmc.stat[p1+p2+2+3,1]
 }else{par.1<-mcmc.stat[1:p1,1]
 par.2<-mcmc.stat[(p1+1):(p1+p2),1]
-thv  <-mcmc.stat[p1+p2+1,1]
+thv  <-mcmc.stat[p1+p2+2+1,1]
 }
 residual<-rep(NA,nob-maxd)
 for (t in (maxd+1):nob){

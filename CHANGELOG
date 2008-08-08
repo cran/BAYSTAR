@@ -1,3 +1,7 @@
+-version 0.1-2 released
+-bug fix in TAR.lagd function. Correct the prior of delay lag d.
+-bug fix in BAYSTAR function.
+
 -version 0.1-1 released
 -bug fix in BAYSTAR function. Correct initial values of phi.1 & phi.2.
 -bug fix in example of BAYSTAR.
