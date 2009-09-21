@@ -11,11 +11,11 @@ temp[i,4:5]<-quantile(x[,i],c(0.025,0.975))    ## 95% Bayes interval of estimate
 colnames(temp)<-c("mean","median","s.d.","lower","upper")
 if(constant==1)
 {
-rownames(temp)<-c(paste("phi1",c(0,lagp1),sep="."),paste("phi2",c(0,lagp2),sep="."),"sigma1","simga2","r","mean1","mean2")
+rownames(temp)<-c(paste("phi1",c(0,lagp1),sep="."),paste("phi2",c(0,lagp2),sep="."),"sigma^2 1","simga^2 2","r","mean1","mean2")
 }
 else
 {
-rownames(temp)<-c(paste("phi1",lagp1,sep="."),paste("phi2",lagp2,sep="."),"sigma1","simga2","r")
+rownames(temp)<-c(paste("phi1",lagp1,sep="."),paste("phi2",lagp2,sep="."),"sigma^2 1","simga^2 2","r")
 }
 }
 return(temp)

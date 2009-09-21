@@ -1,3 +1,12 @@
+-version 0.2-2 released
+-Change in BAYSTAR function: "dev.new()" have replaced "win.graph()".
+
+-version 0.2-1 released
+-bug fix in BAYSTAR function: 'sigma^2' replaced 'sigma'.
+-Changes in BAYSTAR function: To cancel the setting of 'differ'. To add the setting of hyper-parameter for prior distribution. 
+-Add: The estimate of DIC for model comparing.
+
+
 -version 0.1-2 released
 -bug fix in TAR.lagd function. Correct the prior of delay lag d.
 -bug fix in BAYSTAR function.
