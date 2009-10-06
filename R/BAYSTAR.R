@@ -1,5 +1,5 @@
 `BAYSTAR` <-
-function(x,lagp1,lagp2,nIteration,nBurnin,constant,d0,step.thv,thresVar,mu01,v01,mu02,v02,v0,lambda0,refresh) {
+function(x,lagp1,lagp2,Iteration,Burnin,constant,d0,step.thv,thresVar,mu01,v01,mu02,v02,v0,lambda0,refresh) {
 ##Time.initial<-Sys.time()
 ## Initialize
 if (missing(constant)){
@@ -28,14 +28,14 @@ if (!is.vector(refresh) || length(refresh) != 1)
     stop ("'refresh' must be a scalar")
   if (refresh < 0)
     stop ("'refresh' must be positive")
-  if (refresh > nIteration)
-    stop ("'refresh' must be less than 'nIteration'")
+  if (refresh > Iteration)
+    stop ("'refresh' must be less than 'Iteration'")
 }
 p1<- length(lagp1); p2<- length(lagp2)            ## No. of covariate in two regimes
 nx<- length(x)
 #if (differ ==1){
 #yt<-x[2:nx]-x[2:nx-1]   }
-#else 
+#else
 
 yt<- x
 nob<- length(yt)
@@ -47,7 +47,7 @@ if (!missing(thresVar)){
     stop ("Data for the threshold variable are not enough")}
 }
 else zt<- yt
-         
+
 ## Set initial values
 phi.1 <- rep(0.05, p1 + constant)
 phi.2 <- rep(0.05, p2 + constant)
@@ -151,13 +151,13 @@ bound.thv<- c(quantile(zt,0.25),quantile(zt,0.75))
 
 ## Initialize a matrix for saving all iterative estimates
 if(constant==1){
-par.set<- matrix(NA,nrow=nIteration,ncol=(length(c(phi.1,phi.2,sigma.1,sigma.2,lagd,thres))+2))}
+par.set<- matrix(NA,nrow=Iteration,ncol=(length(c(phi.1,phi.2,sigma.1,sigma.2,lagd,thres))+2))}
 else{
-par.set<- matrix(NA,nrow=nIteration,ncol=length(c(phi.1,phi.2,sigma.1,sigma.2,lagd,thres)))}
+par.set<- matrix(NA,nrow=Iteration,ncol=length(c(phi.1,phi.2,sigma.1,sigma.2,lagd,thres)))}
 loglik.1<-loglik.2<-DIC<-NA  ## to calculate DIC
 
 ## Start of MCMC sampling
-for (igb in 1:nIteration){
+for (igb in 1:Iteration){
 if (!missing(thresVar)){
 phi.1<- TAR.coeff(1,yt,p1,p2,sigma.1,lagd,thres,mu01,v01,lagp1,lagp2,constant=constant,zt)        ## Draw phi.1 from a multivariate normal distribution
 phi.2<- TAR.coeff(2,yt,p1,p2,sigma.2,lagd,thres,mu02,v02,lagp1,lagp2,constant=constant,zt)        ## Draw phi.2 from a multivariate normal distribution
@@ -222,7 +222,7 @@ cat("------------","\n")
 } ## End of MCMC sampling
 
 ## Summarize the collected MCMC estimates
-mcmc.stat<- TAR.summary(par.set[(nBurnin+1):nIteration,1:(ncol0-1)],lagp1,lagp2,constant=constant)
+mcmc.stat<- TAR.summary(par.set[(Burnin+1):Iteration,1:(ncol0-1)],lagp1,lagp2,constant=constant)
 print(round(mcmc.stat,4))
 
 
@@ -240,7 +240,7 @@ loglik.2<-TAR.lik(yt,p1,p2,mcmc.stat[1:(p1+constant),1],mcmc.stat[(p1+constant+1
 else{
 loglik.2<-TAR.lik(yt,p1,p2,mcmc.stat[1:(p1+constant),1],mcmc.stat[(p1+constant+1):(p1+constant+p2+constant),1],mcmc.stat[(p1+constant+p2+constant+1),1],mcmc.stat[(p1+constant+p2+constant+2),1],lag.d,mcmc.stat[(p1+constant+p2+constant+3),1],lagp1,lagp2,constant=constant)
 }
-DIC<-(2*(-2*sum(loglik.1[(nBurnin+1):nIteration]))/length(loglik.1[(nBurnin+1):nIteration]))-(-2*loglik.2)
+DIC<-(2*(-2*sum(loglik.1[(Burnin+1):Iteration]))/length(loglik.1[(Burnin+1):Iteration]))-(-2*loglik.2)
 cat(" DIC = ",DIC,"\n")
 ##################################################
 ## Trace plots and ACF for all parameter estimates
@@ -281,7 +281,7 @@ par(mfrow=c(kk,3),cex=.6,cex.axis=0.8,lwd=0.1,las=1,ps=12,pch=0.5)
 
 ## ACF of collected iterations for all estimates
 for (i in 1:nnp){
-acf(par.set[(nBurnin+1):nIteration,i],main=pword[i],xlab="",ylab="",lag.max=100)}
+acf(par.set[(Burnin+1):Iteration,i],main=pword[i],xlab="",ylab="",lag.max=100)}
 
 
 ## Calculate the residual for TAR model
@@ -313,10 +313,9 @@ else{
  else{
   residual[t-maxd]<- yt[t] - sum(par.2 * yt[t-lagp2])
  }
-}                                   
 }
-tar<-list(mcmc=par.set,coef=round(mcmc.stat,4),residual=residual,lagd=lag.d,DIC=DIC)
+}
+tar<-list(mcmc=par.set,posterior=par.set[(Burnin+1):Iteration,1:(ncol0-1)],coef=round(mcmc.stat,4),residual=residual,lagd=lag.d,DIC=DIC)
 return(tar)
 ##Sys.time()-Time.initial
 }
-

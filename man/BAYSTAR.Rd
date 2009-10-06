@@ -9,11 +9,11 @@ Parsimonious subset AR could be assigned in each regime in the
 BAYSTAR function rather than a full AR model (i.e. the
 autoregressive orders could be not a continuous series).}
 \synopsis{
-BAYSTAR(x, lagp1, lagp2, nIteration, nBurnin, constant, d0, step.thv, thresVar, mu01, v01, mu02, v02, v0, lambda0, refresh)
+BAYSTAR(x, lagp1, lagp2, Iteration, Burnin, constant, d0, step.thv, thresVar, mu01, v01, mu02, v02, v0, lambda0, refresh)
 }
 \usage{
 
-BAYSTAR(x, lagp1, lagp2, nIteration, nBurnin, constant, d0, step.thv, thresVar, mu01, v01, mu02, v02, v0, lambda0, refresh)
+BAYSTAR(x, lagp1, lagp2, Iteration, Burnin, constant, d0, step.thv, thresVar, mu01, v01, mu02, v02, v0, lambda0, refresh)
 
 }
 
@@ -26,9 +26,9 @@ BAYSTAR(x, lagp1, lagp2, nIteration, nBurnin, constant, d0, step.thv, thresVar, 
   
   \item{lagp2}{ A vector of non-zero autoregressive lags for the upper regime (regime two).}
   
-  \item{nIteration}{ Total number of MCMC iterations.}
+  \item{Iteration}{ The number of MCMC iterations.}
   
-  \item{nBurnin}{ Number of burn-in iterations.}
+  \item{Burnin}{ The number of burn-in iterations for the sampler.}
   
   \item{constant}{ The intercepts include in the model for each regime, if \code{constant}=1.
                    Otherwise, if \code{constant}=0. (Default: \code{constant}=1)}
@@ -94,15 +94,17 @@ subset AR model in each regime rather than a full AR model.
 
 \value{
 A list of output with containing the following components:
-  \item{mcmc }{All MCMC estimates of unknown parameters (including burn-in iterations).}
-  \item{coef }{Summary statistics of parameter estimates by the collected MCMC estimates after burn-in iterations.}
+  \item{mcmc }{All MCMC iterations.}
+  \item{posterior }{The initial \code{Burnin} iterations are discarded as a burn-in sample, the final sample of (\code{Iteration-Burnin}) iterates is used for posterior inference.}
+  \item{coef }{Summary Statistics of parameter estimation based on the final sample of (\code{Iteration-Burnin}) iterates.}
   \item{residual }{Residuals from the estimated model.}
   \item{lagd }{The mode of time delay lag of the threshold variable.}
-  \item{DIC }{The estimate of Deviance Information Criterion for model comparing. (spiegelhalter et al., 2002)}
+  \item{DIC }{The deviance information criterion (DIC); a Bayesian method for model comparison (Spiegelhalter et al, 2002)}
 }
 
 \author{ Cathy W. S. Chen, Edward M.H. Lin, F.C. Liu, and Richard Gerlach  }
 \examples{
+library(BAYSTAR)
 data(unemployrate)
 x<- unemployrate
 nx<- length(x)
@@ -111,12 +113,24 @@ lagp1<- c(2,3,4,10,12)
 lagp2<- c(2,3,12)
 
 ## Total MCMC iterations and burn-in iterations
-nIteration<- 10000
-nBurnin<- 2000
+Iteration<- 10000
+Burnin<- 2000
 
-## Step size for the MH algorithm
-step.thv<- 2.0
-y<- BAYSTAR(differ.x,lagp1,lagp2,nIteration,nBurnin,constant=0,step.thv=step.thv)
+## A RW (random walk) MH algorithm is used in simulating the threshold value
+## Step size for the RW MH
+
+step.thv<- 2.5
+
+out1 <- BAYSTAR(differ.x,lagp1,lagp2,Iteration,Burnin,constant=0,step.thv=step.thv)
+
+
+d0 <- 4
+out2 <- BAYSTAR(differ.x,lagp1,lagp2,Iteration,Burnin,d0,constant=0,step.thv=step.thv)
+
+## Comparison with DIC
+
+library(coda)
+geweke.diag(out2$posterior, frac1=0.1, frac2=0.5)
 }
 
 \keyword{ methods }

@@ -1,3 +1,8 @@
+-version 0.2-3 released
+-update example of BAYSTAR.
+-update some descriptions of BAYSTAR.
+-Add: the data set of the final sample of (Iteration-Burnin) iterates is used for posterior inference.
+
 -version 0.2-2 released
 -Change in BAYSTAR function: "dev.new()" have replaced "win.graph()".
 
