@@ -106,31 +106,24 @@ A list of output with containing the following components:
 \examples{
 library(BAYSTAR)
 data(unemployrate)
-x<- unemployrate
-nx<- length(x)
-differ.x<- x[2:nx]-x[2:nx-1]
-lagp1<- c(2,3,4,10,12)
-lagp2<- c(2,3,12)
+x  <- unemployrate
+nx <- length(x)
+dif.x <- x[2:nx]-x[2:nx-1]
+lagp1 <- c(2,3,4,10,12)
+lagp2 <- c(2,3,12)
 
 ## Total MCMC iterations and burn-in iterations
-Iteration<- 10000
-Burnin<- 2000
+Iteration <- 10000
+Burnin    <- 2000
 
 ## A RW (random walk) MH algorithm is used in simulating the threshold value
 ## Step size for the RW MH
-
 step.thv<- 2.5
 
-out1 <- BAYSTAR(differ.x,lagp1,lagp2,Iteration,Burnin,constant=0,step.thv=step.thv)
-
-
-d0 <- 4
-out2 <- BAYSTAR(differ.x,lagp1,lagp2,Iteration,Burnin,d0,constant=0,step.thv=step.thv)
-
-## Comparison with DIC
+out <- BAYSTAR(dif.x,lagp1,lagp2,Iteration,Burnin,constant=0,step.thv=step.thv)
 
 library(coda)
-geweke.diag(out2$posterior, frac1=0.1, frac2=0.5)
+geweke.diag(out$posterior, frac1=0.1, frac2=0.5)
 }
 
 \keyword{ methods }
