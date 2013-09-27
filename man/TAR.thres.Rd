@@ -5,13 +5,9 @@
   The prior for the threshold parameter \eqn{thres}, follows a uniform prior on a range (l,u), where l and u can be set as relevant percentiles of the observed threshold variable. This prior could be considered to correspond to an empirical Bayes approach, rather than a fully Bayesian one.  The posterior distribution of \eqn{thres} is not of a standard distributional form, thus requiring us to use the Metropolis-Hastings (MH) method to achieve the desired sample for \eqn{thres}.
 
  }
-\synopsis{
-TAR.thres(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, lagd, thres, step.r = 0.02, bound, lagp1, lagp2, constant = 1, thresVar)
-}
 \usage{
-TAR.thres(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, lagd, thres, step.r = 0.02, bound, lagp1, lagp2, constant = 1)
-
-TAR.thres(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, lagd, thres, step.r = 0.02, bound, lagp1, lagp2, constant = 1, thresVar)
+TAR.thres(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, lagd, thres, 
+          step.r = 0.02, bound, lagp1, lagp2, constant = 1, thresVar)
 }
 \arguments{
   A list containing:

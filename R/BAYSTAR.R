@@ -1,5 +1,4 @@
-`BAYSTAR` <-
-function(x,lagp1,lagp2,Iteration,Burnin,constant,d0,step.thv,thresVar,mu01,v01,mu02,v02,v0,lambda0,refresh) {
+BAYSTAR<-function(x,lagp1,lagp2,Iteration,Burnin,constant,d0,step.thv,thresVar,mu01,v01,mu02,v02,v0,lambda0,refresh,tplot) {
 ##Time.initial<-Sys.time()
 ## Initialize
 if (missing(constant)){
@@ -22,7 +21,12 @@ if (missing(step.thv)){
     stop ("'step.thv' is missing")
 }
 if (missing(refresh)){
-refresh <- 1000}
+if(Iteration < 1000){
+refresh <- Iteration /2
+}
+else{
+refresh <- 1000
+}}
 else{
 if (!is.vector(refresh) || length(refresh) != 1)
     stop ("'refresh' must be a scalar")
@@ -30,6 +34,9 @@ if (!is.vector(refresh) || length(refresh) != 1)
     stop ("'refresh' must be positive")
   if (refresh > Iteration)
     stop ("'refresh' must be less than 'Iteration'")
+}
+if (missing(tplot)){
+tplot ="FALSE"
 }
 p1<- length(lagp1); p2<- length(lagp2)            ## No. of covariate in two regimes
 nx<- length(x)
@@ -53,7 +60,7 @@ phi.1 <- rep(0.05, p1 + constant)
 phi.2 <- rep(0.05, p2 + constant)
 sigma.1<- 0.2
 sigma.2<- 0.2
-lagd<- 3
+lagd<- 1
 thres<- median(zt)
 accept.r<- 0
 sum.r<- 0
@@ -244,6 +251,7 @@ DIC<-(2*(-2*sum(loglik.1[(Burnin+1):Iteration]))/length(loglik.1[(Burnin+1):Iter
 cat(" DIC = ",DIC,"\n")
 ##################################################
 ## Trace plots and ACF for all parameter estimates
+if(tplot =="TRUE"){
 dev.new()
 ts.plot(yt)
 title("Trend plot of data.")
@@ -282,7 +290,7 @@ par(mfrow=c(kk,3),cex=.6,cex.axis=0.8,lwd=0.1,las=1,ps=12,pch=0.5)
 ## ACF of collected iterations for all estimates
 for (i in 1:nnp){
 acf(par.set[(Burnin+1):Iteration,i],main=pword[i],xlab="",ylab="",lag.max=100)}
-
+}
 
 ## Calculate the residual for TAR model
 maxd<-max(lagp1,lagp2)

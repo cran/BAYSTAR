@@ -4,13 +4,9 @@
 \description{
   We employ a conjugate prior, Inverse-Gamma distribution, for sigma squared in regime j, j=1,2. To draw the variance of error distribution from an Inverse-Gamma posterior distribution.
 }
-\synopsis{
-TAR.sigma(reg, ay, thres, lagd, p1, p2, ph, v, lambda, lagp1, lagp2, constant = 1, thresVar)
-}
 \usage{
-TAR.sigma(reg, ay, thres, lagd, p1, p2, ph, v, lambda, lagp1, lagp2, constant = 1)
-
-TAR.sigma(reg, thres, lagd, p1, p2, ph, ay, v, lambda, lagp1, lagp2, constant = 1, thresVar)
+TAR.sigma(reg, ay, thres, lagd, p1, p2, ph, v, 
+          lambda, lagp1, lagp2, constant = 1, thresVar)
 }
 
 \arguments{

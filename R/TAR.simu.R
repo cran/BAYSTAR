@@ -1,5 +1,4 @@
-`TAR.simu` <-
-function(nob,p1,p2,ph.1,ph.2,sig.1,sig.2,lagd,thres,lagp1,lagp2){
+TAR.simu<-function(nob,p1,p2,ph.1,ph.2,sig.1,sig.2,lagd,thres,lagp1,lagp2){
 
 ## Simulate nmax observations and discard first
 ## 1000 observations.

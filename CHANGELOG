@@ -1,3 +1,22 @@
+-version 0.2-9 released
+-changes in example of BAYSTAR.
+-update some descriptions of BAYSTAR.
+-Add an option in BAYSTAR (tplot): provide trace plots and ACF plots for all parameter estimates.
+
+-version 0.2-8 released
+-bug fix in BAYSTAR.
+-bug fix in TAR.sigma, TAR.coeff, and TAR.lik.
+-changes in example of BAYSTAR.
+
+-version 0.2-7 released
+-bug fix in BAYSTAR.
+-fix the Rd line widths 
+
+-version 0.2-6 released
+-bug fix in TAR.sigma of BAYSTAR.
+-bug fix and remove \synopsis in Rd files.
+
+
 -version 0.2-5 released
 -bug fix in startup messages of BAYSTAR.
 

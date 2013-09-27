@@ -4,13 +4,9 @@
 \description{
   To calculate the model log-likelihood function.
 }
-\synopsis{
-TAR.lik(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, lagd, thres, lagp1, lagp2, constant = 1, thresVar)
-}
 \usage{
-TAR.lik(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, lagd, thres, lagp1, lagp2, constant = 1)
-
-TAR.lik(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, lagd, thres, lagp1, lagp2, constant = 1, thresVar)
+TAR.lik(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, 
+        lagd, thres, lagp1, lagp2, constant = 1, thresVar)
 }
 \arguments{
   A list containing:

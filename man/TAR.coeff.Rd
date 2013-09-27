@@ -4,13 +4,9 @@
 \description{
   We assume a normal prior for the AR coefficients and draw AR coefficients from a multivariate normal posterior distribution. Parsimonious subset AR could be assigned in each regime in the BAYSTAR function rather than a full AR model.
 }
-\synopsis{
-TAR.coeff(reg, ay, p1, p2, sig, lagd, thres, mu0, v0, lagp1, lagp2, constant = 1, thresVar)
-}
 \usage{
-TAR.coeff(reg, ay, p1, p2, sig, lagd, thres, mu0, v0, lagp1, lagp2, constant = 1)
-
-TAR.coeff(reg, ay, p1, p2, sig, lagd, thres, mu0, v0, lagp1, lagp2, constant = 1, thresVar)
+TAR.coeff(reg, ay, p1, p2, sig, lagd, 
+          thres, mu0, v0, lagp1, lagp2, constant = 1, thresVar)
 }
 \arguments{
   A list containing:

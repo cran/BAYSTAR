@@ -8,12 +8,10 @@ allow for higher-order AR models in the different regimes.
 Parsimonious subset AR could be assigned in each regime in the
 BAYSTAR function rather than a full AR model (i.e. the
 autoregressive orders could be not a continuous series).}
-\synopsis{
-BAYSTAR(x, lagp1, lagp2, Iteration, Burnin, constant, d0, step.thv, thresVar, mu01, v01, mu02, v02, v0, lambda0, refresh)
-}
 \usage{
 
-BAYSTAR(x, lagp1, lagp2, Iteration, Burnin, constant, d0, step.thv, thresVar, mu01, v01, mu02, v02, v0, lambda0, refresh)
+BAYSTAR(x, lagp1, lagp2, Iteration, Burnin, constant, d0, 
+        step.thv, thresVar, mu01, v01, mu02, v02, v0, lambda0, refresh,tplot)
 
 }
 
@@ -72,8 +70,9 @@ BAYSTAR(x, lagp1, lagp2, Iteration, Burnin, constant, d0, step.thv, thresVar, mu
                   \eqn{\sigma^2}{sigma^2}. (Default: \code{lambda0} = the residual
                   mean squared error of fitting an AR(p1) model to the data.)}
   
-  \item{refresh}{ Each \code{refresh} iteration for monitoring MCMC output. (Default: \code{refresh}=1000)}
+  \item{refresh}{ Each \code{refresh} iteration for monitoring MCMC output. (Default: \code{refresh}=\code{Iteration}/2)}
   
+  \item{tplot}{ Trace plots and ACF plots for all parameter estimates. (Default: \code{tplot}=FALSE )}
  
 }
 \details{
@@ -104,26 +103,31 @@ A list of output with containing the following components:
 
 \author{ Cathy W. S. Chen, Edward M.H. Lin, F.C. Liu, and Richard Gerlach  }
 \examples{
-library(BAYSTAR)
-data(unemployrate)
-x  <- unemployrate
-nx <- length(x)
-dif.x <- x[2:nx]-x[2:nx-1]
-lagp1 <- c(2,3,4,10,12)
-lagp2 <- c(2,3,12)
+
+set.seed(989981)
+## Set the true values of all parameters
+nob<- 200                ## No. of observations
+lagd<- 1                  ## delay lag of threshold variable
+r<- 0.4                   ## r is the threshold value
+sig.1<- 0.8; sig.2<- 0.5  ## variances of error distributions for two regimes
+p1<- 2; p2<- 1            ## No. of covariate in two regimes
+ph.1<- c(0.1,-0.4,0.3)    ## mean coefficients for regime 1
+ph.2<- c(0.2,0.6)     ## mean coefficients for regime 2
+lagp1<-1:2
+lagp2<-1:1
+
+yt<- TAR.simu(nob,p1,p2,ph.1,ph.2,sig.1,sig.2,lagd,r,lagp1,lagp2)
+
 
 ## Total MCMC iterations and burn-in iterations
-Iteration <- 10000
-Burnin    <- 2000
+Iteration <- 500
+Burnin    <- 200
+
 
 ## A RW (random walk) MH algorithm is used in simulating the threshold value
 ## Step size for the RW MH
-step.thv<- 2.5
+step.thv<- 0.08
 
-out <- BAYSTAR(dif.x,lagp1,lagp2,Iteration,Burnin,constant=0,step.thv=step.thv)
-
-library(coda)
-geweke.diag(out$posterior, frac1=0.1, frac2=0.5)
+out <- BAYSTAR(yt,lagp1,lagp2,Iteration,Burnin,constant=1,step.thv=step.thv,tplot=TRUE)
 }
-
 \keyword{ methods }

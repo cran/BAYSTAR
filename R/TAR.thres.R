@@ -1,5 +1,4 @@
-`TAR.thres` <-
-function(ay,p1,p2,ph.1,ph.2,sig.1,sig.2,lagd,thres,step.r=0.02,bound,lagp1,lagp2,constant=1,thresVar){   ## step.r is the step size of the MH sampling.
+TAR.thres<-function(ay,p1,p2,ph.1,ph.2,sig.1,sig.2,lagd,thres,step.r=0.02,bound,lagp1,lagp2,constant=1,thresVar){   ## step.r is the step size of the MH sampling.
                                                                                      ## bound is the hyper-parameter of a Gamma prior
 new.r<- thres+step.r*rnorm(1,mean=0,sd=1)    ## Sampling a candidate threshold value
 

@@ -4,13 +4,9 @@
 \description{
   The delay d has a discrete uniform prior over the integers: 1,2,..., d0, where d0 is a set maximum delay.  We draw the delay lag of threshold variable from a multinomial distribution.
 }
-\synopsis{
-TAR.lagd(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, thres, lagp1, lagp2, constant = 1, d0, thresVar )
-}
 \usage{
-TAR.lagd(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, thres, lagp1, lagp2, constant = 1, d0)
-
-TAR.lagd(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, thres, lagp1, lagp2, constant = 1, d0, thresVar)
+TAR.lagd(ay, p1, p2, ph.1, ph.2, sig.1, sig.2, 
+         thres, lagp1, lagp2, constant = 1, d0, thresVar)
 }
 \arguments{
   A list containing:

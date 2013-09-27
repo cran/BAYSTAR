@@ -1,5 +1,4 @@
-`TAR.lagd` <-
-function(ay,p1,p2,ph.1,ph.2,sig.1,sig.2,thres,lagp1,lagp2,constant=1,d0,thresVar){
+TAR.lagd<-function(ay,p1,p2,ph.1,ph.2,sig.1,sig.2,thres,lagp1,lagp2,constant=1,d0,thresVar){
 
 loglik<-lik<-pr<-NULL
 
