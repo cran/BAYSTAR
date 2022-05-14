@@ -1,5 +1,10 @@
 import(mvtnorm,coda)
 
+importFrom("grDevices", "dev.new")
+importFrom("graphics", "lines", "par", "title")
+importFrom("stats", "acf", "ar", "median", "plot.ts", "quantile",
+             "rgamma", "rnorm", "runif", "sd", "ts.plot")
+
 export(
        BAYSTAR,
        TAR.coeff,

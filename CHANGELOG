@@ -1,3 +1,6 @@
+-version 0.2-10 released
+- import selected functions in the NAMESPACE.
+
 -version 0.2-9 released
 -changes in example of BAYSTAR.
 -update some descriptions of BAYSTAR.
@@ -10,7 +13,7 @@
 
 -version 0.2-7 released
 -bug fix in BAYSTAR.
--fix the Rd line widths 
+-fix the Rd line widths
 
 -version 0.2-6 released
 -bug fix in TAR.sigma of BAYSTAR.
@@ -33,7 +36,7 @@
 
 -version 0.2-1 released
 -bug fix in BAYSTAR function: 'sigma^2' replaced 'sigma'.
--Changes in BAYSTAR function: To cancel the setting of 'differ'. To add the setting of hyper-parameter for prior distribution. 
+-Changes in BAYSTAR function: To cancel the setting of 'differ'. To add the setting of hyper-parameter for prior distribution.
 -Add: The estimate of DIC for model comparing.
 
 
